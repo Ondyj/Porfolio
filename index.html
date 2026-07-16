@@ -5,305 +5,136 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ondřej Jócsik | Portfolio</title>
   <style>
-    /* ZÁKLADNÍ STYL (Plynulé přechody pro Dark Mode) */
-    html {
-      scroll-behavior: smooth;
-    }
-
+    /* ZÁKLADNÍ STYL */
+    html { scroll-behavior: smooth; }
     body {
-      margin: 0;
-      padding: 0;
-      background-color: #f8f9fa;
-      color: #333333;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      overflow-x: hidden;
-      line-height: 1.6;
+      margin: 0; padding: 0; background-color: #f8f9fa; color: #333333;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden; line-height: 1.6;
       transition: background-color 0.4s ease, color 0.4s ease;
     }
 
     /* --- NAVIGAČNÍ LIŠTA --- */
     #navbar {
-      position: fixed;
-      top: -100px;
-      left: 0;
-      width: 100%;
-      padding: 15px 40px;
-      box-sizing: border-box;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      position: fixed; top: -100px; left: 0; width: 100%; padding: 15px 40px;
+      box-sizing: border-box; display: flex; justify-content: space-between;
+      align-items: center; z-index: 1000; background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease, border-color 0.4s ease;
     }
-
-    #navbar.scrolled {
-      top: 0;
-    }
-
-    /* Logo / Iniciály vlevo */
-    .nav-logo {
-      font-weight: 800;
-      font-size: 1.2rem;
-      letter-spacing: 1px;
-      color: #111111;
-      transition: color 0.4s ease;
-    }
-
-    /* Odkazy uprostřed */
-    .nav-links {
-      display: flex;
-      gap: 30px;
-    }
-
-    #navbar a.text-link {
-      text-decoration: none;
-      color: #111111;
-      font-weight: 600;
-      font-size: 1.1rem;
-      transition: color 0.3s ease;
-    }
-
-    #navbar a.text-link:hover {
-      color: #007bff;
-    }
-
-    /* Sekce pro ikony vpravo */
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .nav-icon, .theme-toggle {
-      color: #111111;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: color 0.3s ease, transform 0.3s ease;
-    }
+    #navbar.scrolled { top: 0; }
+    .nav-logo { font-weight: 800; font-size: 1.2rem; letter-spacing: 1px; color: #111111; transition: color 0.4s ease; }
+    .nav-links { display: flex; gap: 30px; }
+    #navbar a.text-link { text-decoration: none; color: #111111; font-weight: 600; font-size: 1.1rem; transition: color 0.3s ease; }
+    #navbar a.text-link:hover { color: #007bff; }
     
-    .nav-icon:hover, .theme-toggle:hover {
-      color: #007bff;
-      transform: scale(1.1);
-    }
-
-    /* Skrytí/zobrazení ikon podle režimu */
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .nav-icon, .theme-toggle { color: #111111; background: none; border: none; cursor: pointer; padding: 0; display: flex; transition: transform 0.3s ease, color 0.3s ease; }
+    .nav-icon:hover, .theme-toggle:hover { color: #007bff; transform: scale(1.1); }
     .icon-sun { display: none; }
     .icon-moon { display: block; }
-    
     body.dark-mode .icon-sun { display: block; }
     body.dark-mode .icon-moon { display: none; }
 
     /* 1. HERO SEKCE */
     .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      background: #ffffff;
-      border-bottom: 1px solid #eaeaea;
-      position: relative;
+      height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      align-items: center; text-align: center; background: #ffffff;
+      border-bottom: 1px solid #eaeaea; position: relative;
       transition: background-color 0.4s ease, border-color 0.4s ease;
     }
-
-    .hero h1 {
-      font-size: 4.5rem;
-      margin: 0;
-      font-weight: 800;
-      letter-spacing: -1px;
-      color: #111111;
-      transition: color 0.4s ease;
-    }
-
-    .hero .subtitle {
-      color: #888888;
-      font-size: 1.2rem;
-      margin-top: 5px;
-      margin-bottom: 25px;
-      font-weight: 400;
-    }
-
-    .hero h2 {
-      font-size: 1.5rem;
-      color: #000000;
-      font-weight: 600;
-      margin: 0;
-      padding: 10px 20px;
-      background: #f0f0f0;
-      border-radius: 50px;
-      display: inline-block;
-      transition: background-color 0.4s ease, color 0.4s ease;
-    }
-
-    .scroll-indicator {
-      position: absolute;
-      bottom: 40px;
-      font-size: 1.5rem;
-      animation: bounce 2s infinite;
-      color: #555555;
-    }
-
+    .hero h1 { font-size: 4.5rem; margin: 0; font-weight: 800; letter-spacing: -1px; color: #111111; transition: color 0.4s ease; }
+    .hero .subtitle { color: #888888; font-size: 1.2rem; margin-top: 5px; margin-bottom: 25px; }
+    .scroll-indicator { position: absolute; bottom: 40px; font-size: 1.5rem; animation: bounce 2s infinite; color: #555555; }
     @keyframes bounce {
       0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
       40% { transform: translateY(-15px); }
       60% { transform: translateY(-7px); }
     }
 
-    /* Kontejner */
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 80px 20px;
-    }
-
-    /* 2. SCROLL ANIMACE A SEKCE */
-    .hidden {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    /* KONTEJNER A SEKCE */
+    .container { max-width: 850px; margin: 0 auto; padding: 80px 20px; }
+    
+    /* SCROLL ANIMACE */
+    .hidden { opacity: 0; transform: translateY(40px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    .show { opacity: 1; transform: translateY(0); }
 
     .section-box {
-      background: #ffffff;
-      padding: 40px;
-      border-radius: 16px;
-      margin-bottom: 50px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      border: 1px solid #f0f0f0;
-      scroll-margin-top: 100px;
-      transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+      background: #ffffff; padding: 40px; border-radius: 16px; margin-bottom: 50px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); border: 1px solid #f0f0f0;
+      scroll-margin-top: 100px; transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+    .section-box h3 { margin-top: 0; font-size: 1.8rem; color: #111111; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; margin-bottom: 25px; transition: color 0.4s ease, border-color 0.4s ease; }
+
+    /* MŘÍŽKA KLIENTŮ */
+    .clients-grid { display: flex; flex-wrap: wrap; gap: 15px; }
+    .client-tag {
+      background: #f0f0f0; padding: 10px 20px; border-radius: 50px; font-weight: 600;
+      color: #333; transition: background 0.3s ease, color 0.3s ease;
     }
 
-    .section-box h3 {
-      margin-top: 0;
-      font-size: 1.8rem;
-      color: #111111;
-      border-bottom: 2px solid #f0f0f0;
-      padding-bottom: 10px;
-      margin-bottom: 20px;
-      transition: color 0.4s ease, border-color 0.4s ease;
+    /* MŘÍŽKA YOUTUBE VIDEÍ (PORTFOLIO) */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
     }
+    .portfolio-item {
+      display: flex; justify-content: center; align-items: center;
+      background-color: #f0f0f0; border-radius: 12px;
+      aspect-ratio: 16 / 9; /* Pokud chceš čistý čtverec, přepiš 16 / 9 na 1 / 1 */
+      text-decoration: none; color: #333; font-size: 2.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease;
+      background-size: cover; background-position: center; position: relative;
+      overflow: hidden;
+    }
+    .portfolio-item:hover {
+      transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    /* Ikonka Play přes obrázek */
+    .play-icon {
+      background: rgba(0,0,0,0.6); color: white; border-radius: 50%;
+      width: 50px; height: 50px; display: flex; justify-content: center; align-items: center;
+      font-size: 1.2rem; backdrop-filter: blur(4px); transition: background 0.3s;
+    }
+    .portfolio-item:hover .play-icon { background: #007bff; }
 
-    /* Tlačítka */
-    .button-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-top: 25px;
+    /* KONTAKTNÍ FORMULÁŘ */
+    .contact-form { display: flex; flex-direction: column; gap: 15px; }
+    .contact-form input, .contact-form textarea {
+      width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 8px;
+      font-family: inherit; font-size: 1rem; box-sizing: border-box;
+      background: #fafafa; transition: border 0.3s, background 0.4s, color 0.4s;
     }
+    .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: #007bff; }
+    .contact-form button {
+      padding: 15px 30px; font-size: 1rem; font-weight: 600; color: #fff;
+      background: #000; border: none; border-radius: 50px; cursor: pointer;
+      transition: background 0.3s, transform 0.3s; margin-top: 10px; align-self: flex-start;
+    }
+    .contact-form button:hover { background: #333; transform: translateY(-2px); }
 
-    a.button {
-      display: inline-block;
-      padding: 14px 28px;
-      color: white;
-      background: #000000;
-      text-decoration: none;
-      font-weight: 600;
-      border-radius: 50px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
+    /* ================= DARK MODE ================= */
+    body.dark-mode { background-color: #0d0d0d; color: #e0e0e0; }
+    body.dark-mode #navbar { background: rgba(17, 17, 17, 0.85); border-bottom: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); }
+    body.dark-mode .nav-logo, body.dark-mode #navbar a.text-link, body.dark-mode .nav-icon, body.dark-mode .theme-toggle { color: #ffffff; }
+    body.dark-mode #navbar a.text-link:hover, body.dark-mode .nav-icon:hover, body.dark-mode .theme-toggle:hover { color: #007bff; }
     
-    a.button:hover {
-      background: #333333;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    }
-
-    a.button.secondary {
-      background: #ffffff;
-      color: #000000;
-      border: 2px solid #000000;
-      box-shadow: none;
-    }
-    a.button.secondary:hover {
-      background: #f8f9fa;
-      transform: translateY(-2px);
-    }
-
-    /* =========================================
-       DARK MODE STYLY (přepíše barvy, když je aktivní)
-       ========================================= */
-    body.dark-mode {
-      background-color: #0d0d0d;
-      color: #e0e0e0;
-    }
+    body.dark-mode .hero { background: #111111; border-bottom: 1px solid #222222; }
+    body.dark-mode .hero h1 { color: #ffffff; }
     
-    body.dark-mode #navbar {
-      background: rgba(17, 17, 17, 0.85);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    }
-
-    body.dark-mode .nav-logo,
-    body.dark-mode #navbar a.text-link,
-    body.dark-mode .nav-icon,
-    body.dark-mode .theme-toggle {
-      color: #ffffff;
-    }
+    body.dark-mode .section-box { background: #1a1a1a; border: 1px solid #333333; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
+    body.dark-mode .section-box h3 { color: #ffffff; border-bottom: 2px solid #333333; }
     
-    body.dark-mode #navbar a.text-link:hover,
-    body.dark-mode .nav-icon:hover,
-    body.dark-mode .theme-toggle:hover {
-      color: #007bff;
-    }
-
-    body.dark-mode .hero {
-      background: #111111;
-      border-bottom: 1px solid #222222;
-    }
-
-    body.dark-mode .hero h1 {
-      color: #ffffff;
-    }
-
-    body.dark-mode .hero h2 {
-      background: #2a2a2a;
-      color: #ffffff;
-    }
-
-    body.dark-mode .section-box {
-      background: #1a1a1a;
-      border: 1px solid #333333;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    body.dark-mode .section-box h3 {
-      color: #ffffff;
-      border-bottom: 2px solid #333333;
-    }
-
-    body.dark-mode a.button {
-      background: #007bff;
-    }
-    body.dark-mode a.button:hover {
-      background: #0056b3;
-    }
+    body.dark-mode .client-tag { background: #333; color: #ddd; }
     
-    body.dark-mode a.button.secondary {
-      background: #1a1a1a;
-      color: #ffffff;
-      border: 2px solid #ffffff;
-    }
-    body.dark-mode a.button.secondary:hover {
-      background: #333333;
-    }
+    body.dark-mode .portfolio-item { background-color: #2a2a2a; }
+    
+    body.dark-mode .contact-form input, body.dark-mode .contact-form textarea { background: #222; border-color: #444; color: #fff; }
+    body.dark-mode .contact-form button { background: #007bff; }
+    body.dark-mode .contact-form button:hover { background: #0056b3; }
   </style>
 </head>
 <body>
@@ -311,6 +142,7 @@
   <nav id="navbar">
     <div class="nav-logo">OJ.</div>
     <div class="nav-links">
+      <a href="#klienti" class="text-link">Klienti</a>
       <a href="#portfolio" class="text-link">Portfolio</a>
       <a href="#kontakt" class="text-link">Kontakt</a>
     </div>
@@ -353,39 +185,65 @@
       <p>Střihu videa se naplno věnuji poslední dva roky. Jsem samostatný, pracovitý a nedělá mi nejmenší problém se rychle přizpůsobit jakémukoliv vizuálnímu stylu. Mým cílem je vždy doručit výsledek, se kterým bude klient spokojen. Své projekty stříhám a kompletně zpracovávám v <strong>DaVinci Resolve Studio</strong>.</p>
     </section>
 
+    <section id="klienti" class="section-box hidden">
+      <h3>Pro koho jsem stříhal</h3>
+      <p>Během své praxe jsem měl možnost podílet se na tvorbě videí pro tyto tvůrce a projekty:</p>
+      <div class="clients-grid">
+        <div class="client-tag">Jméno Youtubera</div>
+        <div class="client-tag">Herní Kanál XYZ</div>
+        <div class="client-tag">Další Klient</div>
+      </div>
+    </section>
+
     <section id="portfolio" class="section-box hidden">
-      <h3>Projekty & Ukázky práce</h3>
-      <p>Podívej se na můj nejnovější Showreel a ukázky toho, jak automatizuji své workflow pomocí programování.</p>
-      <div class="button-container">
-        <a href="ODKAZ_NA_TVUJ_YOUTUBE" target="_blank" class="button">🎬 Přehrát Showreel</a>
-        <a href="ODKAZ_NA_TVUJ_GITHUB" target="_blank" class="button secondary">💻 Vývojářské portfolio</a>
+      <h3>Ukázky práce</h3>
+      <p>Kliknutím na náhled si video přehrajete přímo na YouTube.</p>
+      
+      <div class="portfolio-grid">
+        <a href="ODKAZ_NA_YT_VIDEO_1" target="_blank" class="portfolio-item">
+          <div class="play-icon">▶</div>
+        </a>
+        
+        <a href="ODKAZ_NA_YT_VIDEO_2" target="_blank" class="portfolio-item">
+          <div class="play-icon">▶</div>
+        </a>
+
+        <a href="ODKAZ_NA_YT_VIDEO_3" target="_blank" class="portfolio-item">
+          <div class="play-icon">▶</div>
+        </a>
+        
+        <a href="ODKAZ_NA_YT_VIDEO_4" target="_blank" class="portfolio-item">
+          <div class="play-icon">▶</div>
+        </a>
       </div>
     </section>
 
     <section id="kontakt" class="section-box hidden">
-      <h3>Kontakt & Dokumenty</h3>
-      <p>Máš zájem o spolupráci? Napiš mi e-mail nebo si stáhni můj aktuální životopis se všemi zkušenostmi a technologiemi.</p>
-      <div class="button-container">
-        <a href="mailto:TVUJ_EMAIL@gmail.com" class="button">📧 Napsat e-mail</a>
-        <a href="ODKAZ_NA_TVUJ_NOVY_ZIVOTOPIS.pdf" target="_blank" class="button secondary">📄 Stáhnout nové CV</a>
-      </div>
+      <h3>Kontaktujte mě</h3>
+      <p>Máš zájem o spolupráci, nebo potřebuješ sestříhat video? Napiš mi přímo přes tento formulář.</p>
+      
+      <form action="https://formsubmit.co/cvockoedits@gmail.com" method="POST" class="contact-form">
+        <input type="hidden" name="_captcha" value="false">
+        
+        <input type="text" name="Jméno" placeholder="Vaše jméno nebo přezdívka" required>
+        <input type="email" name="Email" placeholder="Váš e-mail pro odpověď" required>
+        <textarea name="Zpráva" placeholder="Popište mi, s čím potřebujete pomoct..." rows="5" required></textarea>
+        
+        <button type="submit">Odeslat zprávu</button>
+      </form>
     </section>
 
   </div>
 
   <script>
-    // 1. Logika pro vyjížděcí navigační lištu
+    // 1. Logika pro navigační lištu
     const navbar = document.getElementById('navbar');
-    
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 100) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
+      if (window.scrollY > 100) { navbar.classList.add('scrolled'); } 
+      else { navbar.classList.remove('scrolled'); }
     });
 
-    // 2. Logika pro objevování sekcí
+    // 2. Opravená logika pro objevování sekcí
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -394,16 +252,13 @@
           entry.target.classList.remove('show');
         }
       });
-    }, {
-      threshold: 0.1
-    });
+    }, { threshold: 0.1 });
 
     const hiddenElements = document.querySelectorAll('.hidden');
     hiddenElements.forEach((el) => observer.observe(el));
 
-    // 3. Logika pro Dark Mode (vylepšená pro SVG ikony)
+    // 3. Logika pro Dark Mode
     const themeBtn = document.getElementById('theme-btn');
-    
     themeBtn.addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
     });
