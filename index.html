@@ -37,7 +37,7 @@
     body.dark-mode .icon-sun { display: block; }
     body.dark-mode .icon-moon { display: none; }
 
-    /* --- 1. HERO SEKCE (ANIMOVANÝ GRADIENT) --- */
+    /* --- 1. HERO SEKCE (VÝRAZNĚJŠÍ ANIMOVANÝ GRADIENT) --- */
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -47,10 +47,10 @@
     .hero {
       height: 100vh; display: flex; flex-direction: column; justify-content: center;
       align-items: center; text-align: center; 
-      /* Plynulý přeliv světlých barev */
-      background: linear-gradient(-45deg, #ffffff, #f0f4f8, #e1e8ed, #ffffff);
+      /* Výraznější, ale stále čistý gradient pro světlý režim */
+      background: linear-gradient(-45deg, #f8f9fa, #e2e8f0, #cbd5e1, #f8f9fa);
       background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite; /* 15 sekundový pomalý cyklus */
+      animation: gradientBG 15s ease infinite; 
       border-bottom: 1px solid #eaeaea; position: relative;
       transition: border-color 0.4s ease;
     }
@@ -67,9 +67,13 @@
     /* KONTEJNER A SEKCE */
     .container { max-width: 850px; margin: 0 auto; padding: 80px 20px; }
     
-    /* --- SCROLL ANIMACE PRO VŠECHNY PRVKY --- */
-    /* Zajišťuje skrytí a posunutí dolů. Přidáno ke každému "čtverečku" pro hezčí efekt */
-    .hidden { opacity: 0; transform: translateY(40px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    /* --- POMALEJŠÍ A PLYNULEJŠÍ SCROLL ANIMACE --- */
+    .hidden { 
+      opacity: 0; 
+      transform: translateY(50px); 
+      /* Změněno z 0.6s na 1.2s pro nádherně plynulé a měkké vplutí */
+      transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1); 
+    }
     .show { opacity: 1; transform: translateY(0); }
 
     .section-box {
@@ -96,7 +100,7 @@
     .portfolio-item {
       display: flex; justify-content: center; align-items: center;
       background-color: #f0f0f0; border-radius: 12px;
-      aspect-ratio: 16 / 9; /* Přepiš na 1 / 1 pro dokonalý čtverec */
+      aspect-ratio: 16 / 9;
       text-decoration: none; color: #333;
       transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease;
       background-size: cover; background-position: center; position: relative;
@@ -126,6 +130,14 @@
       transition: background 0.3s, transform 0.3s; margin-top: 10px; align-self: flex-start;
     }
     .contact-form button:hover { background: #333; transform: translateY(-2px); }
+    
+    /* Hláška o úspěšném odeslání */
+    .form-message {
+      display: none; padding: 15px; border-radius: 8px; margin-top: 10px;
+      font-weight: 600; text-align: center;
+    }
+    .form-message.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    .form-message.error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
 
     /* ================= DARK MODE ================= */
     body.dark-mode { background-color: #0d0d0d; color: #e0e0e0; }
@@ -133,9 +145,9 @@
     body.dark-mode .nav-logo, body.dark-mode #navbar a.text-link, body.dark-mode .nav-icon, body.dark-mode .theme-toggle { color: #ffffff; }
     body.dark-mode #navbar a.text-link:hover, body.dark-mode .nav-icon:hover, body.dark-mode .theme-toggle:hover { color: #007bff; }
     
-    /* Změna gradientu pro Dark Mode */
+    /* Tmavý režim - mnohem luxusnější a výraznější gradient (noční modrá/fialová) */
     body.dark-mode .hero { 
-      background: linear-gradient(-45deg, #111111, #1a1a24, #0f172a, #111111);
+      background: linear-gradient(-45deg, #0f172a, #1e1b4b, #172554, #0f172a);
       background-size: 400% 400%;
       border-bottom: 1px solid #222222; 
     }
@@ -150,6 +162,9 @@
     body.dark-mode .contact-form input, body.dark-mode .contact-form textarea { background: #222; border-color: #444; color: #fff; }
     body.dark-mode .contact-form button { background: #007bff; }
     body.dark-mode .contact-form button:hover { background: #0056b3; }
+    
+    /* Zelená hláška v tmavém režimu */
+    body.dark-mode .form-message.success { background: #1b4b2e; color: #8fdfaa; border-color: #286b43; }
   </style>
 </head>
 <body>
@@ -218,15 +233,12 @@
         <a href="ODKAZ_NA_YT_VIDEO_1" target="_blank" class="portfolio-item hidden" style="background-image: url('ODKAZ_NA_OBRAZEK_1.jpg');">
           <div class="play-icon">▶</div>
         </a>
-        
         <a href="ODKAZ_NA_YT_VIDEO_2" target="_blank" class="portfolio-item hidden" style="background-image: url('ODKAZ_NA_OBRAZEK_2.jpg');">
           <div class="play-icon">▶</div>
         </a>
-
         <a href="ODKAZ_NA_YT_VIDEO_3" target="_blank" class="portfolio-item hidden" style="background-image: url('ODKAZ_NA_OBRAZEK_3.jpg');">
           <div class="play-icon">▶</div>
         </a>
-        
         <a href="ODKAZ_NA_YT_VIDEO_4" target="_blank" class="portfolio-item hidden" style="background-image: url('ODKAZ_NA_OBRAZEK_4.jpg');">
           <div class="play-icon">▶</div>
         </a>
@@ -237,12 +249,14 @@
       <h3>Kontaktujte mě</h3>
       <p>Máš zájem o spolupráci, nebo potřebuješ sestříhat video? Napiš mi přímo přes tento formulář.</p>
       
-      <form action="https://formsubmit.co/cvockoedits@gmail.com" method="POST" class="contact-form">
+      <form id="contact-form" action="https://formsubmit.co/cvockoedits@gmail.com" method="POST" class="contact-form">
         <input type="hidden" name="_captcha" value="false">
-        <input type="text" name="Jméno" placeholder="Vaše jméno nebo přezdívka" required>
+        <input type="text" name="Jméno" placeholder="Vaše jméno" required>
         <input type="email" name="Email" placeholder="Váš e-mail pro odpověď" required>
         <textarea name="Zpráva" placeholder="Popište mi, s čím potřebujete pomoct..." rows="5" required></textarea>
         <button type="submit">Odeslat zprávu</button>
+        
+        <div id="form-message" class="form-message"></div>
       </form>
     </section>
 
@@ -256,7 +270,7 @@
       else { navbar.classList.remove('scrolled'); }
     });
 
-    // 2. Opravená logika pro objevování sekcí i čtverečků!
+    // 2. Logika pro pomalejší objevování sekcí
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -265,11 +279,8 @@
           entry.target.classList.remove('show');
         }
       });
-    }, { 
-      threshold: 0.1 // Stačí, když je prvek vidět z 10 %, a animace se spustí
-    });
+    }, { threshold: 0.1 });
 
-    // Sleduje VŠECHNY prvky s třídou .hidden (tedy sekce, kartičky i náhledovky)
     const hiddenElements = document.querySelectorAll('.hidden');
     hiddenElements.forEach((el) => observer.observe(el));
 
@@ -277,6 +288,47 @@
     const themeBtn = document.getElementById('theme-btn');
     themeBtn.addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
+    });
+
+    // 4. AJAX odesílání formuláře (bez přesměrování na anglickou stránku)
+    const form = document.getElementById('contact-form');
+    const formMessage = document.getElementById('form-message');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault(); // Zabrání standardnímu odeslání a přesměrování
+      
+      const formData = new FormData(form);
+      
+      // Odešle data na pozadí
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          // Úspěšně odesláno
+          formMessage.textContent = 'Úspěšně odesláno! Co nejdříve vám odepíši.';
+          formMessage.className = 'form-message success';
+          formMessage.style.display = 'block';
+          form.reset(); // Vymaže pole formuláře
+          
+          // Hláška zmizí po 5 sekundách
+          setTimeout(() => { formMessage.style.display = 'none'; }, 5000);
+        } else {
+          // Chyba při odesílání
+          formMessage.textContent = 'Jejda, někde nastala chyba. Zkuste to prosím znovu.';
+          formMessage.className = 'form-message error';
+          formMessage.style.display = 'block';
+        }
+      })
+      .catch(error => {
+        formMessage.textContent = 'Jejda, někde nastala chyba. Zkuste to prosím znovu.';
+        formMessage.className = 'form-message error';
+        formMessage.style.display = 'block';
+      });
     });
   </script>
 
