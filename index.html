@@ -6,14 +6,52 @@
   <title>Ondřej Jócsik | Portfolio</title>
   <style>
     /* ZÁKLADNÍ STYL (SVĚTLÝ REŽIM) */
+    html {
+      scroll-behavior: smooth; /* Plynulé posouvání při kliknutí na odkaz */
+    }
+
     body {
       margin: 0;
       padding: 0;
-      background-color: #f8f9fa; /* Jemně šedobílá pro moderní vzhled (ne ostrá bílá) */
-      color: #333333; /* Tmavě šedý text pro skvělou čitelnost */
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; /* Modernější fonty */
+      background-color: #f8f9fa;
+      color: #333333;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       overflow-x: hidden;
       line-height: 1.6;
+    }
+
+    /* --- NAVIGAČNÍ LIŠTA --- */
+    #navbar {
+      position: fixed;
+      top: -100px; /* Na začátku je schovaná nad obrazovkou */
+      left: 0;
+      width: 100%;
+      padding: 20px 0;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      z-index: 1000; /* Vždy úplně nahoře */
+      background: rgba(255, 255, 255, 0.85); /* Poloprůhledná bílá */
+      backdrop-filter: blur(12px); /* Moderní rozmazání pozadí (skleněný efekt) */
+      -webkit-backdrop-filter: blur(12px); /* Pro Safari */
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); /* Jemný stín */
+      transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1); /* Plynulé vyjetí */
+    }
+
+    #navbar.scrolled {
+      top: 0; /* Když má tuto třídu, sjede dolů na viditelné místo */
+    }
+
+    #navbar a {
+      text-decoration: none;
+      color: #111111;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    #navbar a:hover {
+      color: #007bff; /* Modrá barva při najetí myší */
     }
 
     /* 1. HERO SEKCE - Úvod přes celou obrazovku */
@@ -24,22 +62,19 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      /* Světlé pozadí s decentním vzorem nebo jen čistá barva. 
-         Zde je čisté pozadí, aby vynikl text. */
       background: #ffffff;
-      border-bottom: 1px solid #eaeaea; /* Jemná oddělovací linka */
-      position: relative; /* Pro absolutní pozicování šipky */
+      border-bottom: 1px solid #eaeaea;
+      position: relative;
     }
 
     .hero h1 {
-      font-size: 4.5rem; /* Větší a odvážnější jméno */
+      font-size: 4.5rem;
       margin: 0;
       font-weight: 800;
       letter-spacing: -1px;
       color: #111111;
     }
 
-    /* Podtitulek šedou barvou */
     .hero .subtitle {
       color: #888888;
       font-size: 1.2rem;
@@ -54,12 +89,11 @@
       font-weight: 600;
       margin: 0;
       padding: 10px 20px;
-      background: #f0f0f0; /* Jemné pozadí za pozicí */
-      border-radius: 50px; /* Tvar pilulky */
+      background: #f0f0f0;
+      border-radius: 50px;
       display: inline-block;
     }
 
-    /* Šipka ukazující dolů */
     .scroll-indicator {
       position: absolute;
       bottom: 40px;
@@ -76,16 +110,16 @@
 
     /* Kontejner pro zbytek obsahu */
     .container {
-      max-width: 800px; /* Užší obsah pro lepší čtení (styl SkelikEdit) */
+      max-width: 800px;
       margin: 0 auto;
-      padding: 100px 20px;
+      padding: 80px 20px;
     }
 
-    /* 2. SCROLL ANIMACE */
+    /* 2. SCROLL ANIMACE A SEKCE */
     .hidden {
       opacity: 0;
       transform: translateY(40px);
-      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); /* Hladší 'Apple-like' animace */
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .show {
@@ -93,14 +127,14 @@
       transform: translateY(0);
     }
 
-    /* Karty a sekce (Světlý styl s jemným stínem) */
     .section-box {
       background: #ffffff;
       padding: 40px;
-      border-radius: 16px; /* Kulatější rohy (SkelikEdit vibe) */
+      border-radius: 16px;
       margin-bottom: 50px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Velmi jemný stín */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
       border: 1px solid #f0f0f0;
+      scroll-margin-top: 100px; /* Zabrání tomu, aby lišta zakryla nadpis po kliknutí na odkaz */
     }
 
     .section-box h3 {
@@ -116,7 +150,7 @@
     .button-container {
       display: flex;
       flex-wrap: wrap;
-      gap: 15px; /* Mezera mezi tlačítky */
+      gap: 15px;
       margin-top: 25px;
     }
 
@@ -124,10 +158,10 @@
       display: inline-block;
       padding: 14px 28px;
       color: white;
-      background: #000000; /* Černé tlačítko na světlém pozadí vypadá prémiově */
+      background: #000000;
       text-decoration: none;
       font-weight: 600;
-      border-radius: 50px; /* Zakulacená tlačítka */
+      border-radius: 50px;
       transition: all 0.3s ease;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
@@ -138,7 +172,6 @@
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     }
 
-    /* Sekundární tlačítko */
     a.button.secondary {
       background: #ffffff;
       color: #000000;
@@ -153,9 +186,15 @@
 </head>
 <body>
 
+  <nav id="navbar">
+    <a href="#portfolio">Portfolio</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+
   <header class="hero">
     <h1>Ondřej Jócsik</h1>
-    <div class="subtitle">"Edity tvořené s láskou ❤️"</div>
+    <div class="subtitle">edity tvořené s láskou ❤️</div>
+    <h2>Tvůrce videa na volné noze & Vývojář</h2>
     <div class="scroll-indicator">↓</div>
   </header>
 
@@ -166,7 +205,7 @@
       <p>Jsem student oboru Filozofie pro umělou inteligenci s technickým základem z informatiky na FAV ZČU. Ačkoliv mám pevné základy v programování, během studia jsem se začal plně věnovat střihu a postprodukci videa, v nichž již přes dva roky působím jako živnostník.</p>
     </section>
 
-    <section class="section-box hidden">
+    <section id="portfolio" class="section-box hidden">
       <h3>Projekty & Ukázky práce</h3>
       <p>Podívej se na můj nejnovější Showreel a ukázky toho, jak automatizuji své workflow pomocí programování.</p>
       <div class="button-container">
@@ -175,17 +214,31 @@
       </div>
     </section>
 
-    <section class="section-box hidden">
-      <h3>Dokumenty ke stažení</h3>
-      <p>Můj aktuální životopis se všemi zkušenostmi a technologiemi.</p>
+    <section id="kontakt" class="section-box hidden">
+      <h3>Kontakt & Dokumenty</h3>
+      <p>Máš zájem o spolupráci? Napiš mi e-mail nebo si stáhni můj aktuální životopis se všemi zkušenostmi a technologiemi.</p>
       <div class="button-container">
-        <a href="ODKAZ_NA_TVUJ_NOVY_ZIVOTOPIS.pdf" target="_blank" class="button">📄 Stáhnout nové CV</a>
+        <a href="mailto:TVUJ_EMAIL@gmail.com" class="button">📧 Napsat e-mail</a>
+        <a href="ODKAZ_NA_TVUJ_NOVY_ZIVOTOPIS.pdf" target="_blank" class="button secondary">📄 Stáhnout nové CV</a>
       </div>
     </section>
 
   </div>
 
   <script>
+    // 1. Logika pro vyjížděcí navigační lištu
+    const navbar = document.getElementById('navbar');
+    
+    window.addEventListener('scroll', () => {
+      // Pokud odscrolluješ více než 100 pixelů dolů, lišta vyjede
+      if (window.scrollY > 100) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // 2. Logika pro objevování sekcí
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -195,7 +248,7 @@
         }
       });
     }, {
-      threshold: 0.1 /* Animace začne, když je 10% prvku viditelných */
+      threshold: 0.1
     });
 
     const hiddenElements = document.querySelectorAll('.hidden');
