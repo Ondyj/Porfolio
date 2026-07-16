@@ -27,10 +27,10 @@
       top: -100px;
       left: 0;
       width: 100%;
-      padding: 15px 40px; /* Zvětšeno odsazení na krajích */
-      box-sizing: border-box; /* Aby padding nerozbil šířku 100% */
+      padding: 15px 40px;
+      box-sizing: border-box;
       display: flex;
-      justify-content: space-between; /* Rozdělí prvky na kraje a doprostřed */
+      justify-content: space-between;
       align-items: center;
       z-index: 1000;
       background: rgba(255, 255, 255, 0.85);
@@ -60,7 +60,7 @@
       gap: 30px;
     }
 
-    #navbar a {
+    #navbar a.text-link {
       text-decoration: none;
       color: #111111;
       font-weight: 600;
@@ -68,23 +68,40 @@
       transition: color 0.3s ease;
     }
 
-    #navbar a:hover {
+    #navbar a.text-link:hover {
       color: #007bff;
     }
 
-    /* Tlačítko pro Dark Mode vpravo */
-    .theme-toggle {
+    /* Sekce pro ikony vpravo */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-icon, .theme-toggle {
+      color: #111111;
       background: none;
       border: none;
-      font-size: 1.5rem;
       cursor: pointer;
       padding: 0;
-      transition: transform 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.3s ease, transform 0.3s ease;
     }
     
-    .theme-toggle:hover {
-      transform: scale(1.1); /* Při najetí myší se mírně zvětší */
+    .nav-icon:hover, .theme-toggle:hover {
+      color: #007bff;
+      transform: scale(1.1);
     }
+
+    /* Skrytí/zobrazení ikon podle režimu */
+    .icon-sun { display: none; }
+    .icon-moon { display: block; }
+    
+    body.dark-mode .icon-sun { display: block; }
+    body.dark-mode .icon-moon { display: none; }
 
     /* 1. HERO SEKCE */
     .hero {
@@ -235,11 +252,15 @@
     }
 
     body.dark-mode .nav-logo,
-    body.dark-mode #navbar a {
+    body.dark-mode #navbar a.text-link,
+    body.dark-mode .nav-icon,
+    body.dark-mode .theme-toggle {
       color: #ffffff;
     }
     
-    body.dark-mode #navbar a:hover {
+    body.dark-mode #navbar a.text-link:hover,
+    body.dark-mode .nav-icon:hover,
+    body.dark-mode .theme-toggle:hover {
       color: #007bff;
     }
 
@@ -268,9 +289,8 @@
       border-bottom: 2px solid #333333;
     }
 
-    /* Změna barev tlačítek v Dark Mode */
     body.dark-mode a.button {
-      background: #007bff; /* Modrá vynikne ve tmě lépe než černá na černé */
+      background: #007bff;
     }
     body.dark-mode a.button:hover {
       background: #0056b3;
@@ -291,10 +311,33 @@
   <nav id="navbar">
     <div class="nav-logo">OJ.</div>
     <div class="nav-links">
-      <a href="#portfolio">Portfolio</a>
-      <a href="#kontakt">Kontakt</a>
+      <a href="#portfolio" class="text-link">Portfolio</a>
+      <a href="#kontakt" class="text-link">Kontakt</a>
     </div>
-    <button class="theme-toggle" id="theme-btn">🌙</button>
+    <div class="nav-right">
+      <a href="https://www.youtube.com/@Cvocko" target="_blank" class="nav-icon" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.13 1 12 1 12s0 3.87.46 5.58a2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.87 23 12 23 12s0-3.87-.46-5.58z"></path>
+          <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon>
+        </svg>
+      </a>
+      <button class="theme-toggle" id="theme-btn" aria-label="Přepnout tmavý režim">
+        <svg class="icon-moon" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+    </div>
   </nav>
 
   <header class="hero">
@@ -305,7 +348,7 @@
 
   <div class="container">
     
-<section class="section-box hidden">
+    <section class="section-box hidden">
       <h3>O mně</h3>
       <p>Střihu videa se naplno věnuji poslední dva roky. Jsem samostatný, pracovitý a nedělá mi nejmenší problém se rychle přizpůsobit jakémukoliv vizuálnímu stylu. Mým cílem je vždy doručit výsledek, se kterým bude klient spokojen. Své projekty stříhám a kompletně zpracovávám v <strong>DaVinci Resolve Studio</strong>.</p>
     </section>
@@ -358,19 +401,11 @@
     const hiddenElements = document.querySelectorAll('.hidden');
     hiddenElements.forEach((el) => observer.observe(el));
 
-    // 3. Logika pro Dark Mode
+    // 3. Logika pro Dark Mode (vylepšená pro SVG ikony)
     const themeBtn = document.getElementById('theme-btn');
     
     themeBtn.addEventListener('click', () => {
-      // Přepne třídu dark-mode na elementu body
       document.body.classList.toggle('dark-mode');
-      
-      // Změní ikonku podle aktuálního režimu
-      if (document.body.classList.contains('dark-mode')) {
-        themeBtn.textContent = '☀️'; // Sluníčko pro návrat do světlého
-      } else {
-        themeBtn.textContent = '🌙'; // Měsíček pro tmavý
-      }
     });
   </script>
 
