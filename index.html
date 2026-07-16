@@ -20,22 +20,28 @@
       line-height: 1.6;
     }
 
-    /* --- NAVIGAČNÍ LIŠTA --- */
+/* --- NAVIGAČNÍ LIŠTA --- */
     #navbar {
       position: fixed;
-      top: -100px; /* Na začátku je schovaná nad obrazovkou */
+      top: -100px;
       left: 0;
       width: 100%;
       padding: 20px 0;
       display: flex;
       justify-content: center;
       gap: 40px;
-      z-index: 1000; /* Vždy úplně nahoře */
-      background: rgba(255, 255, 255, 0.85); /* Poloprůhledná bílá */
-      backdrop-filter: blur(12px); /* Moderní rozmazání pozadí (skleněný efekt) */
-      -webkit-backdrop-filter: blur(12px); /* Pro Safari */
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); /* Jemný stín */
-      transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1); /* Plynulé vyjetí */
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      
+      /* ÚPRAVA ZDE: Výraznější stín pro lepší ohraničení */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); 
+      
+      /* ÚPRAVA ZDE: Jemná spodní linka pro jasný okraj */
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1); 
+      
+      transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     #navbar.scrolled {
